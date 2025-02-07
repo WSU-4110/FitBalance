@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import Navbar from "../components/Navbar";
 
 const Nutritions = () => {
   return (
-    <div>Nutritions</div>
-  )
-}
+    <div>
+      <Navbar></Navbar>
 
-export default Nutritions
+      <div className=" flex flex-col md:flex-row w-full h-[calc(100vh-80px)] ">
+        <h1>Nutrition</h1>
+      </div>
+    </div>
+  );
+};
+
+export default Nutritions;
