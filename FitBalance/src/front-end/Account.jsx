@@ -30,13 +30,16 @@ const Account = () => {
   return (
     <>
       <Navbar />
-      <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="flex items-center justify-center h-max-[calc(100vh-80px)] bg-gray-100 pt-5">
         <div className="w-96 p-8 bg-white rounded-lg shadow-lg">
           <h2 className="mb-6 text-2xl font-bold text-center">
             {isLogin ? "Welcome Back!" : "Create Account"}
           </h2>
 
-          <form className="flex flex-col items-center" onSubmit={(e) => e.preventDefault()}>
+          <form
+            className="flex flex-col items-center"
+            onSubmit={(e) => e.preventDefault()}
+          >
             {!isLogin && (
               <div className="w-full mb-4">
                 <label htmlFor="fullname" className="block text-gray-700">
@@ -97,7 +100,10 @@ const Account = () => {
             {/* Confirm Password Field (Sign Up Only) */}
             {!isLogin && (
               <div className="w-full mb-4 relative">
-                <label htmlFor="confirm-password" className="block text-gray-700">
+                <label
+                  htmlFor="confirm-password"
+                  className="block text-gray-700"
+                >
                   Confirm Password
                 </label>
                 <div className="relative">
@@ -115,7 +121,11 @@ const Account = () => {
                     onClick={toggleConfirmPassword}
                     className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-600"
                   >
-                    {showConfirmPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+                    {showConfirmPassword ? (
+                      <FiEye size={20} />
+                    ) : (
+                      <FiEyeOff size={20} />
+                    )}
                   </button>
                 </div>
               </div>
@@ -134,9 +144,7 @@ const Account = () => {
 
           <div className="mt-4 text-center">
             <span className="text-gray-600">or continue with</span>
-            <button
-              className="flex items-center justify-center w-full px-4 py-2 mt-3 text-white transition-opacity bg-black rounded-lg hover:opacity-90 duration-250"
-            >
+            <button className="flex items-center justify-center w-full px-4 py-2 mt-3 text-white transition-opacity bg-black rounded-lg hover:opacity-90 duration-250">
               <FcGoogle className="mr-3 text-xl" />
               {isLogin ? "Google Sign In" : "Google Sign Up"}
             </button>
