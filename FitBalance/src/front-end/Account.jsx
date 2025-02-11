@@ -30,9 +30,9 @@ const Account = () => {
   return (
     <>
       <Navbar />
-      <div className="flex items-center justify-center h-max-[calc(100vh-80px)] bg-white pt-5">
-        <div className="w-96 p-8 bg-[#8AC342] rounded-2xl shadow-lg">
-          <h2 className="mb-6 text-2xl font-bold text-center text-white">
+      <div className="flex items-center justify-center h-max-[calc(100vh-80px)] bg-white pt-5 pb-2">
+        <div className="w-96 p-8 bg-[#8AC342] rounded-2xl ">
+          <h2 className="mb-6 text-2xl font-bold text-center">
             {isLogin ? "Welcome Back!" : "Create Account"}
           </h2>
 
@@ -90,7 +90,7 @@ const Account = () => {
                 <button
                   type="button"
                   onClick={togglePassword}
-                  className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-600"
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 text-white"
                 >
                   {showPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
                 </button>
@@ -116,7 +116,7 @@ const Account = () => {
                   <button
                     type="button"
                     onClick={toggleConfirmPassword}
-                    className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-600"
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 text-white"
                   >
                     {showConfirmPassword ? (
                       <FiEye size={20} />
@@ -130,7 +130,7 @@ const Account = () => {
 
             <div className="w-full flex justify-center">
               <Button
-                tag={isLogin ? "Continue" : "Get Started"}
+                tag={isLogin ? "Sign in" : "Get Started"}
                 bgCol="#000000"
                 textCol="#ffffff"
                 mt={20}
@@ -139,9 +139,9 @@ const Account = () => {
             </div>
           </form>
 
-          <div className="mt-4 text-center">
-            <span className="text-gray-600">or continue with</span>
-            <button className="flex items-center justify-center w-full px-4 py-2 mt-3 text-white transition-opacity bg-black rounded-lg hover:opacity-90 duration-250">
+          <div className="mt-4 text-center flex flex-col justify-center items-center ">
+            <span className="text-white">or </span>
+            <button className="flex items-center justify-center w-fit px-8 py-2 mt-3  text-white transition-opacity bg-black rounded-2xl hover:opacity-90 duration-250 poin">
               <FcGoogle className="mr-3 text-xl" />
               {isLogin ? "Google Sign In" : "Google Sign Up"}
             </button>

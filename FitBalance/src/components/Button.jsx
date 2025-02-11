@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button = ({ tag, bgCol, textCol, mt, pxaxis, pyaxis }) => {
+const Button = ({ tag, bgCol, textCol, mt }) => {
   return (
     <button
       style={{
@@ -8,7 +8,7 @@ const Button = ({ tag, bgCol, textCol, mt, pxaxis, pyaxis }) => {
         color: textCol,
         marginTop: mt ? `${mt}px` : "0", // Ensure margin-top is applied if passed
       }}
-      className="w-fit  px-8 py-1 text-white font-medium  cursor-pointer rounded-4xl justify-center items-center"
+      className="w-40 h-12 text-white font-medium text-xl cursor-pointer rounded-4xl  "
     >
       {tag}
     </button>

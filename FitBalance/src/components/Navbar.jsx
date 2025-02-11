@@ -15,7 +15,7 @@ const Navbar = () => {
       {/* Logo */}
       <div className="flex justify-between items-center w-full">
         <h1 className="text-3xl md:text-4xl font-extrabold px-10 py-5.5 md:py-0 text-[#8AC342]">
-          <Link to="/">FitBalance</Link>
+          <Link to="/">Home</Link>
         </h1>
 
         {/* Hamburger Menu  */}
