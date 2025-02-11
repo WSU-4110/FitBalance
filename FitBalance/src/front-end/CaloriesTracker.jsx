@@ -149,13 +149,13 @@ const CaloriesTracker = () => {
 
             <div className="flex flex-row justify-center space-x-5 pt-5">
               <button
-                className="bg-white px-5 py-1 rounded-2xl font-medium"
+                className="bg-white px-5 py-1 rounded-2xl font-medium cursor-pointer"
                 type="submit"
               >
                 Submit
               </button>
               <button
-                className="bg-[#d1d1d1] px-5 py-1 rounded-2xl font-medium"
+                className="bg-[#f0f0f0] px-5 py-1 rounded-2xl font-medium cursor-pointer"
                 onClick={reload}
                 type="reset"
               >

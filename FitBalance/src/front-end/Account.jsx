@@ -52,7 +52,7 @@ const Account = () => {
                   value={name} // Connect the input field value to the state variable.
                   onChange={(e) => setName(e.target.value)} // Change the state variable to the new value.
                   className="w-full p-2 mt-1 border rounded"
-                  placeholder="Enter your full name"
+                  placeholder="Full name"
                 />
               </div>
             )}
