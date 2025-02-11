@@ -30,9 +30,9 @@ const Account = () => {
   return (
     <>
       <Navbar />
-      <div className="flex items-center justify-center h-max-[calc(100vh-80px)] bg-gray-100 pt-5">
-        <div className="w-96 p-8 bg-white rounded-lg shadow-lg">
-          <h2 className="mb-6 text-2xl font-bold text-center">
+      <div className="flex items-center justify-center h-max-[calc(100vh-80px)] bg-white pt-5">
+        <div className="w-96 p-8 bg-[#8AC342] rounded-2xl shadow-lg">
+          <h2 className="mb-6 text-2xl font-bold text-center text-white">
             {isLogin ? "Welcome Back!" : "Create Account"}
           </h2>
 
@@ -42,7 +42,7 @@ const Account = () => {
           >
             {!isLogin && (
               <div className="w-full mb-4">
-                <label htmlFor="fullname" className="block text-gray-700">
+                <label htmlFor="fullname" className="block text-white">
                   Full Name
                 </label>
                 <input
@@ -58,7 +58,7 @@ const Account = () => {
             )}
 
             <div className="w-full mb-4">
-              <label htmlFor="email" className="block text-gray-700">
+              <label htmlFor="email" className="block text-white">
                 Email
               </label>
               <input
@@ -74,7 +74,7 @@ const Account = () => {
 
             {/* Password Field */}
             <div className="w-full mb-4 relative">
-              <label htmlFor="password" className="block text-gray-700">
+              <label htmlFor="password" className="block text-white">
                 Password
               </label>
               <div className="relative">
@@ -100,10 +100,7 @@ const Account = () => {
             {/* Confirm Password Field (Sign Up Only) */}
             {!isLogin && (
               <div className="w-full mb-4 relative">
-                <label
-                  htmlFor="confirm-password"
-                  className="block text-gray-700"
-                >
+                <label htmlFor="confirm-password" className="block text-white">
                   Confirm Password
                 </label>
                 <div className="relative">
@@ -134,7 +131,7 @@ const Account = () => {
             <div className="w-full flex justify-center">
               <Button
                 tag={isLogin ? "Continue" : "Get Started"}
-                bgCol="#8AC342"
+                bgCol="#000000"
                 textCol="#ffffff"
                 mt={20}
                 type="submit"
@@ -150,7 +147,7 @@ const Account = () => {
             </button>
           </div>
 
-          <p className="mt-4 text-center text-gray-600">
+          <p className="mt-4 text-center text-white">
             {isLogin ? "New here?" : "Already registered?"}{" "}
             <button
               onClick={toggleForm}
