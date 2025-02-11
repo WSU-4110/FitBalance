@@ -30,8 +30,8 @@ const Account = () => {
   return (
     <>
       <Navbar />
-      <div className="flex items-center justify-center h-max-[calc(100vh-80px)] bg-white pt-5 pb-2">
-        <div className="w-96 p-8 bg-[#8AC342] rounded-2xl ">
+      <div className="flex items-center justify-center h-max-[calc(100vh-80px)] bg-white pt-5 pb-2 z-[-1]">
+        <div className="md:w-105 w-96 p-8 bg-[#8AC342] rounded-2xl mx-5 ">
           <h2 className="mb-6 text-2xl font-bold text-center">
             {isLogin ? "Welcome Back!" : "Create Account"}
           </h2>
