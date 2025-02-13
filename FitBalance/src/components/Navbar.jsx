@@ -15,7 +15,7 @@ const Navbar = () => {
       {/* Logo */}
       <div className="flex justify-between items-center w-full">
         <h1 className="text-3xl md:text-4xl font-extrabold px-10 py-5.5 md:py-0 text-[#8AC342]">
-          <Link to="/">Home</Link>
+          <Link to="/">FitBalance</Link>
         </h1>
 
         {/* Hamburger Menu  */}
@@ -25,7 +25,7 @@ const Navbar = () => {
       </div>
 
       {/* Navbar Desktop */}
-      <div className="md:flex hidden">
+      <div className="md:flex hidden ">
         <ul className="flex gap-5 px-10 whitespace-nowrap">
           <li className="text-xl cursor-pointer font-medium text-[#233825] hover:text-[#707070]">
             <Link to="/">Home</Link>
@@ -47,7 +47,7 @@ const Navbar = () => {
 
       {/* Mobile Navbar */}
       <div
-        className={`md:hidden fixed  w-[50%] h-full bg-[#8AC342] transition-transform duration-300 transform ${
+        className={`md:hidden fixed  w-[50%] h-full bg-[#8AC342] transition-transform duration-300 transform z-[1000] ${
           nav ? "translate-x-0" : "-translate-x-full"
         }`}
       >
