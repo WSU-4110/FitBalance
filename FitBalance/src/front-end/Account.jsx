@@ -30,8 +30,8 @@ const Account = () => {
   return (
     <>
       <Navbar />
-      <div className="flex items-center justify-center h-max-[calc(100vh-80px)] bg-gray-100 pt-5">
-        <div className="w-96 p-8 bg-white rounded-lg shadow-lg">
+      <div className="flex items-center justify-center h-max-[calc(100vh-80px)] bg-white pt-5 pb-2 z-[-1]">
+        <div className="md:w-105 w-96 p-8 bg-[#8AC342] rounded-2xl mx-5 ">
           <h2 className="mb-6 text-2xl font-bold text-center">
             {isLogin ? "Welcome Back!" : "Create Account"}
           </h2>
@@ -42,7 +42,7 @@ const Account = () => {
           >
             {!isLogin && (
               <div className="w-full mb-4">
-                <label htmlFor="fullname" className="block text-gray-700">
+                <label htmlFor="fullname" className="block text-white">
                   Full Name
                 </label>
                 <input
@@ -52,13 +52,13 @@ const Account = () => {
                   value={name} // Connect the input field value to the state variable.
                   onChange={(e) => setName(e.target.value)} // Change the state variable to the new value.
                   className="w-full p-2 mt-1 border rounded"
-                  placeholder="Enter your full name"
+                  placeholder="Full name"
                 />
               </div>
             )}
 
             <div className="w-full mb-4">
-              <label htmlFor="email" className="block text-gray-700">
+              <label htmlFor="email" className="block text-white">
                 Email
               </label>
               <input
@@ -74,7 +74,7 @@ const Account = () => {
 
             {/* Password Field */}
             <div className="w-full mb-4 relative">
-              <label htmlFor="password" className="block text-gray-700">
+              <label htmlFor="password" className="block text-white">
                 Password
               </label>
               <div className="relative">
@@ -90,7 +90,7 @@ const Account = () => {
                 <button
                   type="button"
                   onClick={togglePassword}
-                  className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-600"
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 text-white"
                 >
                   {showPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
                 </button>
@@ -100,10 +100,7 @@ const Account = () => {
             {/* Confirm Password Field (Sign Up Only) */}
             {!isLogin && (
               <div className="w-full mb-4 relative">
-                <label
-                  htmlFor="confirm-password"
-                  className="block text-gray-700"
-                >
+                <label htmlFor="confirm-password" className="block text-white">
                   Confirm Password
                 </label>
                 <div className="relative">
@@ -119,7 +116,7 @@ const Account = () => {
                   <button
                     type="button"
                     onClick={toggleConfirmPassword}
-                    className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-600"
+                    className="absolute top-1/2 right-3 transform -translate-y-1/2 text-white"
                   >
                     {showConfirmPassword ? (
                       <FiEye size={20} />
@@ -133,8 +130,8 @@ const Account = () => {
 
             <div className="w-full flex justify-center">
               <Button
-                tag={isLogin ? "Continue" : "Get Started"}
-                bgCol="#8AC342"
+                tag={isLogin ? "Sign in" : "Get Started"}
+                bgCol="#000000"
                 textCol="#ffffff"
                 mt={20}
                 type="submit"
@@ -142,15 +139,15 @@ const Account = () => {
             </div>
           </form>
 
-          <div className="mt-4 text-center">
-            <span className="text-gray-600">or continue with</span>
-            <button className="flex items-center justify-center w-full px-4 py-2 mt-3 text-white transition-opacity bg-black rounded-lg hover:opacity-90 duration-250">
+          <div className="mt-4 text-center flex flex-col justify-center items-center ">
+            <span className="text-white">or </span>
+            <button className="flex items-center justify-center w-fit px-8 py-2 mt-3  text-white transition-opacity bg-black rounded-2xl hover:opacity-90 duration-250 poin">
               <FcGoogle className="mr-3 text-xl" />
               {isLogin ? "Google Sign In" : "Google Sign Up"}
             </button>
           </div>
 
-          <p className="mt-4 text-center text-gray-600">
+          <p className="mt-4 text-center text-white">
             {isLogin ? "New here?" : "Already registered?"}{" "}
             <button
               onClick={toggleForm}
