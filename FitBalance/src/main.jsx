@@ -10,6 +10,8 @@ import Account from "./front-end/Account";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
+// import { CaloriesContext } from "./src/context/CaloriesContext.js";
+
 // Create the router with defined paths
 const router = createBrowserRouter([
   {
@@ -47,6 +49,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <CaloriesContext.Provider>
+      <RouterProvider router={router} />
+    </CaloriesContext.Provider>
   </StrictMode>
 );
