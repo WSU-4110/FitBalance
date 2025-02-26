@@ -32,7 +32,7 @@ const Nutritions = () => {
     const newWeight = Math.max(0, parseInt(value) || 0);
     updatedFoods[foodCategory][index].weight = newWeight;
 
-    // Update the state with the new food data
+    // Update the state with the new food data (weight) entered by the user
     setFoods(updatedFoods);
   };
 
