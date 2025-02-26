@@ -22,7 +22,6 @@ const Nutritions = () => {
   return (
     <>
       <Navbar />
-
       <div className="flex flex-col items-center justify-center w-full h-fit p-8">
         {/* Target Calories Box */}
         <div className="flex flex-col w-fit h-fit items-center justify-center bg-[#8AC342] px-8 py-1 rounded-2xl">

@@ -1,69 +1,53 @@
-FitBalance  
+FitBalance
+A fitness tracking web application to help users manage their nutrition, workouts, and health progress.
 
-A fitness tracking web application to help users manage their nutrition, workouts, and health progress. 
+Overview
+FitBalance is a web-based application designed to help users monitor their daily calorie intake, track workouts, set fitness goals, and stay hydrated. The platform provides a user-friendly interface, personalized recommendations, and progress tracking, all accessible from any device.
 
-  
+Features
+User Registration & Login: Secure authentication with password recovery and OAuth options.
 
-Overview  
+Nutrition Tracking: Log daily meals and track calories, macros, and hydration.
 
-FitBalance is a web-based application designed to help users monitor their daily calorie intake, track workouts, set fitness goals, and stay hydrated. The platform provides a user-friendly interface, personalized recommendations, and progress tracking, all accessible from any device. 
+Workout Plans: Personalized exercise routines with interactive scheduling.
 
-  
+Progress Logs: Visual graphs to monitor weight, calorie intake, and workout performance.
 
-Features  
+Goal Setting: Set fitness goals and receive milestone updates.
 
-User Registration & Login: Secure authentication with password recovery and OAuth options. 
+Admin Dashboard: Manage users, monitor system performance, and review feedback.
 
-Nutrition Tracking: Log daily meals and track calories, macros, and hydration. 
+Technologies Used
+Frontend: HTML, CSS, JavaScript (Framework: React.js)
 
-Workout Plans: Personalized exercise routines with interactive scheduling. 
+Backend: Node.js, Express.js
 
-Progress Logs: Visual graphs to monitor weight, calorie intake, and workout performance. 
+Database: MongoDB
 
-Goal Setting: Set fitness goals and receive milestone updates. 
+Authentication: OAuth, JWT
 
-Admin Dashboard: Manage users, monitor system performance, and review feedback. 
+APIs: External food and exercise databases
 
-  
+Version Control: Git and GitHub
 
-Technologies Used  
+Usage
+Users:
 
-Frontend: HTML, CSS, JavaScript (Framework: React.js) 
+Register and log in to access personalized features.
 
-Backend: Node.js, Express.js 
+Log daily food intake, track hydration, and set fitness goals.
 
-Database: MongoDB 
+Follow workout plans and monitor progress using interactive graphs.
 
-Authentication: OAuth, JWT 
+Administrators:
 
-APIs: External food and exercise databases 
+Manage user accounts, monitor system health, and respond to feedback.
 
-Version Control: Git and GitHub 
+Contributors
+Ibrahim Mohammed
 
-  
+Ahmad Hamdaan
 
-Usage  
+Anwarul Azim
 
-Users: 
-
-Register and log in to access personalized features. 
-
-Log daily food intake, track hydration, and set fitness goals. 
-
-Follow workout plans and monitor progress using interactive graphs. 
-
-Administrators: 
-
-Manage user accounts, monitor system health, and respond to feedback. 
-
-  
-
-Contributors  
-
-Ibrahim Mohammed 
-
-Ahmad Hamdaan 
-
-Anwarul Azim 
-
-Md Ikbal Hussain 
+Md Ikbal Hussain
