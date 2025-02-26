@@ -36,7 +36,7 @@ const Nutritions = () => {
     setFoods(updatedFoods);
   };
 
-  const calculateCaloriesAndProtein = (category, index) => {
+  const calculateMacros = (category, index) => {
     const foodItem = foods[category][index];
     const weightInGrams = foodItem.weight;
     const calories = (weightInGrams / 100) * foodItem.caloriesPer100g;
@@ -47,7 +47,7 @@ const Nutritions = () => {
 
   const renderFoodList = (category) => {
     return foods[category].map((food, index) => {
-      const { calories, protein } = calculateCaloriesAndProtein(category, index);
+      const { calories, protein } = calculateMacros(category, index);
 
       return (
         <li key={index} className="flex justify-between items-center">
@@ -74,7 +74,7 @@ const Nutritions = () => {
   const calculateTotalForCategory = (category) => {
     return foods[category].reduce(
       (totals, food) => {
-        const { calories, protein } = calculateCaloriesAndProtein(category, foods[category].indexOf(food));
+        const { calories, protein } = calculateMacros(category, foods[category].indexOf(food));
         totals.calories += parseFloat(calories);
         totals.protein += parseFloat(protein);
         return totals;
