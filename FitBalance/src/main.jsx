@@ -1,39 +1,21 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { CaloriesProvider } from "./front-end/CaloriesContext"; // Import Context
 import "./index.css";
 import Home from "./front-end/Home";
 import Workout from "./front-end/Workout";
 import CaloriesTracker from "./front-end/CaloriesTracker";
 import Nutritions from "./front-end/Nutritions";
 import Account from "./front-end/Account";
-
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
-// import { CaloriesContext } from "./src/context/CaloriesContext.js";
-
-// Create the router with defined paths
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/Workout",
-    element: <Workout />,
-  },
-  {
-    path: "/caloriestracker",
-    element: <CaloriesTracker />,
-  },
-  {
-    path: "/nutrition",
-    element: <Nutritions />,
-  },
-  {
-    path: "/account",
-    element: <Account />,
-  },
+  { path: "/", element: <Home /> },
+  { path: "/Workout", element: <Workout /> },
+  { path: "/caloriestracker", element: <CaloriesTracker /> },
+  { path: "/nutrition", element: <Nutritions /> },
+  { path: "/account", element: <Account /> },
   {
     path: "*",
     element: (
@@ -49,8 +31,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <CaloriesContext.Provider>
+    <CaloriesProvider>
       <RouterProvider router={router} />
-    </CaloriesContext.Provider>
+    </CaloriesProvider>
   </StrictMode>
 );
