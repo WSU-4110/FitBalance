@@ -22,7 +22,7 @@ Frontend: HTML, CSS, JavaScript (Framework: React.js)
 
 Backend: Node.js, Express.js
 
-Database: MongoDB
+Database: Firebase
 
 Authentication: OAuth, JWT
 
