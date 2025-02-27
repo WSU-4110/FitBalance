@@ -2,6 +2,57 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useCalories } from "./CaloriesContext";
 
+// Strategy Interface
+class CalorieCalculationStrategy {
+  calculate(calories) {
+    throw new Error("This method must be overridden");
+  }
+}
+
+// Concrete Strategies
+class LeanMuscleBuildStrategy extends CalorieCalculationStrategy {
+  calculate(calories) {
+    return Math.round(calories * 1); // No change for lean muscle build
+  }
+}
+
+class WeightLossStrategy extends CalorieCalculationStrategy {
+  calculate(calories) {
+    return Math.round(calories * 0.8); // 80% of calories for weight loss
+  }
+}
+
+class ExtremeWeightLossStrategy extends CalorieCalculationStrategy {
+  calculate(calories) {
+    return Math.round(calories * 0.7); // 70% of calories for extreme weight loss
+  }
+}
+
+class LeanBulkStrategy extends CalorieCalculationStrategy {
+  calculate(calories) {
+    return Math.round(calories * 1.15); // 115% of calories for lean bulk
+  }
+}
+
+// Factory Class
+class CalorieCalculationStrategyFactory {
+  static createStrategy(goalLabel) {
+    switch (goalLabel) {
+      case "Lean Muscle Build":
+        return new LeanMuscleBuildStrategy();
+      case "Weight Loss":
+        return new WeightLossStrategy();
+      case "Extreme Weight Loss":
+        return new ExtremeWeightLossStrategy();
+      case "Lean Bulk":
+        return new LeanBulkStrategy();
+      default:
+        throw new Error("Invalid goal label");
+    }
+  }
+}
+
+// Main Component
 const CaloriesTracker = () => {
   const { setGoalCalories } = useCalories();
 
@@ -10,22 +61,16 @@ const CaloriesTracker = () => {
     { label: "Sedentary: little or no exercise", value: 1.2 },
     { label: "Light: exercise 1-3 times/week", value: 1.375 },
     { label: "Moderate: exercise 4-5 times/week", value: 1.55 },
-    {
-      label: "Active: daily exercise or intense exercise 3-4 times/week",
-      value: 1.725,
-    },
+    { label: "Active: daily exercise or intense exercise 3-4 times/week", value: 1.725 },
     { label: "Very Active: intense exercise 6-7 times/week", value: 1.9 },
-    {
-      label: "Extra Active: very intense exercise daily, or physical job",
-      value: 2.2,
-    },
+    { label: "Extra Active: very intense exercise daily, or physical job", value: 2.2 },
   ];
 
   const goals = [
-    { label: "Lean Muscle Build", value: 1 },
-    { label: "Weight Loss", value: 0.8 },
-    { label: "Extreme Weight Loss", value: 0.7 },
-    { label: "Lean Bulk", value: 1.15 },
+    { label: "Lean Muscle Build" },
+    { label: "Weight Loss" },
+    { label: "Extreme Weight Loss" },
+    { label: "Lean Bulk" },
   ];
 
   const [gender, setGender] = useState("");
@@ -43,18 +88,23 @@ const CaloriesTracker = () => {
       return;
     }
 
+    // Calculate BMR (Basal Metabolic Rate)
     let bmr =
       gender === "male"
         ? 10 * weight + 6.25 * height - 5 * age + 5
         : 10 * weight + 6.25 * height - 5 * age - 161;
 
+    // Calculate total calories based on activity level
     const totalCalories = Math.round(bmr * parseFloat(activity));
     setCalories(totalCalories);
   };
 
   useEffect(() => {
     if (calories && goal) {
-      setGoalCalories(Math.round(calories * parseFloat(goal)));
+      // Use the factory to create the appropriate strategy
+      const strategy = CalorieCalculationStrategyFactory.createStrategy(goal);
+      // Calculate the target calories based on the strategy
+      setGoalCalories(strategy.calculate(calories));
     }
   }, [calories, goal, setGoalCalories]);
 
@@ -66,6 +116,7 @@ const CaloriesTracker = () => {
           onSubmit={calculateCalories}
           className="max-w-md bg-[#8AC342] p-6 rounded-3xl shadow-lg"
         >
+          {/* Gender Selection */}
           <div className="flex justify-center space-x-5 p-3 rounded-lg mb-5">
             {["male", "female"].map((g) => (
               <label
@@ -85,6 +136,7 @@ const CaloriesTracker = () => {
             ))}
           </div>
 
+          {/* Input Fields for Age, Height, Weight */}
           {[
             { label: "Age (Years)", value: age, setter: setAge },
             { label: "Height (cm)", value: height, setter: setHeight },
@@ -101,6 +153,7 @@ const CaloriesTracker = () => {
             </div>
           ))}
 
+          {/* Activity Level Dropdown */}
           <label className="block font-semibold mt-4">Activity Level</label>
           <select
             value={activity}
@@ -117,6 +170,7 @@ const CaloriesTracker = () => {
             ))}
           </select>
 
+          {/* Submit and Reload Buttons */}
           <div className="flex justify-center space-x-5 pt-5">
             <button
               type="submit"
@@ -133,18 +187,17 @@ const CaloriesTracker = () => {
             </button>
           </div>
 
+          {/* Display Maintenance Calories */}
           {calories !== null && (
             <h1 className="text-black text-center text-xl mt-4 border-2 rounded-2xl border-black mx-10">
-              Maintanence: <span className="font-medium">{calories}</span>{" "}
-              calories/day
+              Maintenance: <span className="font-medium">{calories}</span> calories/day
             </h1>
           )}
 
+          {/* Goal Selection Dropdown */}
           {calories !== null && (
             <>
-              <label className="block font-semibold mt-4">
-                Select Your Goal
-              </label>
+              <label className="block font-semibold mt-4">Select Your Goal</label>
               <select
                 value={goal}
                 onChange={(e) => setGoal(e.target.value)}
@@ -154,17 +207,18 @@ const CaloriesTracker = () => {
                   Select Your Goal
                 </option>
                 {goals.map((option) => (
-                  <option key={option.label} value={option.value}>
+                  <option key={option.label} value={option.label}>
                     {option.label}
                   </option>
                 ))}
               </select>
 
+              {/* Display Target Calories */}
               {goal && (
                 <h1 className="text-black text-center text-xl mt-4 border-2 rounded-2xl border-black mx-10">
                   Target:{" "}
                   <span className="font-medium">
-                    {Math.round(calories * parseFloat(goal))}
+                    {CalorieCalculationStrategyFactory.createStrategy(goal).calculate(calories)}
                   </span>{" "}
                   calories/day
                 </h1>
