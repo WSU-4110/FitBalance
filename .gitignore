@@ -1,0 +1,69 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.*
+
+# Build output
+build
+out
+coverage
+.tmp
+.cache
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# System files
+Thumbs.db
+Desktop.ini
+
+# Logs and debug
+logs/*.log
+*.log.*
+*.trace
+
+# Package managers
+npm-cache
+yarn.lock
+package-lock.json
+.pnpm-store
+
+# Misc
+*.bak
+*.tmp
+*.old
+
+# Testing
+jest-coverage
+cypress/videos
+cypress/screenshots
+
+# Docker
+.dockerignore
+Dockerfile*
+
+# Git
+.git
+.gitignore.backup
