@@ -1,12 +1,13 @@
-import Navbar from "../components/Navbar";
-import Button from "../components/Button";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { auth, googleProvider } from "../firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import Navbar from "../components/Navbar";
+import Button from "../components/Button";
 
 const Account = () => {
+  // State variables
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -16,6 +17,7 @@ const Account = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
+  // Toggle between login and sign-up forms
   const toggleForm = () => {
     setIsLogin(!isLogin);
     setName("");
@@ -25,8 +27,37 @@ const Account = () => {
     setError("");
   };
 
+  // password visibility
   const togglePassword = () => setShowPassword((prev) => !prev);
   const toggleConfirmPassword = () => setShowConfirmPassword((prev) => !prev);
+
+  // Auth Facade (Firebase logic)
+  const AuthFacade = {
+    signUp: async (email, password) => {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        return userCredential.user;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    signIn: async (email, password) => {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        return userCredential.user;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+    googleSignIn: async () => {
+      try {
+        const result = await signInWithPopup(auth, googleProvider);
+        return result.user;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
+  };
 
   // Handle Sign-Up
   const handleSignUp = async (e) => {
@@ -37,8 +68,8 @@ const Account = () => {
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log("User created:", userCredential.user);
+      const user = await AuthFacade.signUp(email, password);
+      console.log("User created:", user);
     } catch (error) {
       setError(error.message);
     }
@@ -48,8 +79,8 @@ const Account = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log("User signed in:", userCredential.user);
+      const user = await AuthFacade.signIn(email, password);
+      console.log("User signed in:", user);
     } catch (error) {
       setError(error.message);
     }
@@ -58,8 +89,8 @@ const Account = () => {
   // Handle Google Sign-In
   const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      console.log("Google sign-in success:", result.user);
+      const user = await AuthFacade.googleSignIn();
+      console.log("Google sign-in success:", user);
     } catch (error) {
       setError(error.message);
     }
