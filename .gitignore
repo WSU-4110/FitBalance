@@ -74,3 +74,4 @@ FitBalance/.gitignore.backup
 FitBalance/node_modules/.vite/deps/_metadata.json
 /FitBalance/node_modules
 
+FitBalance/node_modules/.vite/deps/_metadata.json

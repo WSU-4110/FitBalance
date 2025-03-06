@@ -154,19 +154,19 @@ const Nutritions = () => {
     return foods[category].map((food, index) => {
       const nutrition = food.getNutrition();
       return (
-        <li key={index} className="flex justify-between items-center">
+        <li key={index} className="flex justify-between items-center w-full space-x-2 whitespace-nowrap">
           <span>{food.name}</span>
-          <div className="flex items-center">
+          <div className="flex items-center flex-shrink-0">
             <input
               type="number"
-              className="w-16 p-1 border rounded text-center"
+              className="w-16 min-w-[4rem] p-1 border rounded text-center"
               placeholder="100"
               value={food.weight}
               onChange={(e) => handleInputChange(category, index, e.target.value)}
             />
             <span className="ml-1">g</span>
           </div>
-          <div className="text-right">
+          <div className="text-right whitespace-nowrap min-w-[120px]">
             <span>{nutrition.calories} Cal</span>
             {nutrition.protein && <span> / {nutrition.protein}g Protein</span>}
             {nutrition.carbs && <span> / {nutrition.carbs}g Carbs</span>}
