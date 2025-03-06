@@ -50,6 +50,7 @@ FitBalance/*.trace
 FitBalance/npm-cache/
 FitBalance/yarn.lock
 FitBalance/package-lock.json
+/FitBalance/package-lock.json
 FitBalance/.pnpm-store/
 package-lock.json
 
@@ -72,3 +73,4 @@ FitBalance/.git/
 FitBalance/.gitignore.backup
 FitBalance/node_modules/.vite/deps/_metadata.json
 /FitBalance/node_modules
+
