@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "../components/Navbar";
 import { useCalories } from "./CaloriesContext"; // Import Context
 
@@ -13,7 +13,7 @@ class FoodItem {
   // Method to calculate nutrition (calories)
   getNutrition() {
     const calories = ((this.weight / 100) * this.caloriesPer100g).toFixed(1);
-    return { calories: parseFloat(calories) };
+    return { calories: parseFloat(calories) || 0 };
   }
 }
 
@@ -99,7 +99,29 @@ const Nutritions = () => {
       FoodFactory.createFood("fats", "Nut Butters", 550, 45),
     ],
   });
-
+  useEffect(() => {
+    localStorage.setItem("foods", JSON.stringify(foods)); // Save food data to local storage
+  }, [foods]);
+  
+  useEffect(() => {
+    const storedFoods = JSON.parse(localStorage.getItem("foods"));
+    if (storedFoods) {
+      // Recreate the stored food items using FoodFactory
+      const reconstructedFoods = {
+        protein: storedFoods.protein.map(food =>
+          FoodFactory.createFood("protein", food.name, food.caloriesPer100g, food.proteinPer100g, food.weight)
+        ),
+        carbs: storedFoods.carbs.map(food =>
+          FoodFactory.createFood("carbs", food.name, food.caloriesPer100g, food.carbsPer100g, food.weight)
+        ),
+        fats: storedFoods.fats.map(food =>
+          FoodFactory.createFood("fats", food.name, food.caloriesPer100g, food.fatPer100g, food.weight)
+        ),
+      };
+      setFoods(reconstructedFoods);
+    }
+  }, []);
+  
   // State for adding new food
   const [newFood, setNewFood] = useState({
     type: "protein",
@@ -114,7 +136,7 @@ const Nutritions = () => {
 
   // Ensure valid number input for goal calories
   const handleOnChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value.replace(/\D/g, "");
     setGoalCalories(value); // Keep as string to prevent input blocking
   };
 
@@ -136,10 +158,13 @@ const Nutritions = () => {
 
   // Method to calculate total nutrition for a category
   const calculateTotalForCategory = (category) => {
+    if (!foods[category]) return { calories: 0, protein: 0, carbs: 0, fat: 0 };
+  
     return foods[category].reduce(
       (totals, food) => {
+        if (!food) return totals; // Ensure food is valid
         const nutrition = food.getNutrition();
-        totals.calories += nutrition.calories;
+        totals.calories += nutrition.calories || 0;
         if (nutrition.protein) totals.protein += nutrition.protein;
         if (nutrition.carbs) totals.carbs += nutrition.carbs;
         if (nutrition.fat) totals.fat += nutrition.fat;
@@ -210,10 +235,11 @@ const Nutritions = () => {
   };
 
   // Calculate totals for each category
-  const proteinTotal = calculateTotalForCategory("protein");
-  const carbsTotal = calculateTotalForCategory("carbs");
-  const fatsTotal = calculateTotalForCategory("fats");
+  const proteinTotal = useMemo(() => calculateTotalForCategory("protein"), [foods]);
+  const carbsTotal = useMemo(() => calculateTotalForCategory("carbs"), [foods]);
+  const fatsTotal = useMemo(() => calculateTotalForCategory("fats"), [foods]);
 
+ 
   return (
     <>
       <Navbar />
