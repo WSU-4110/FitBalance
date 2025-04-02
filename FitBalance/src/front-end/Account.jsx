@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { auth, googleProvider } from "../firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom"; // Correctly importing useNavigate
 
 const Account = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,6 +16,8 @@ const Account = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate(); // Declare navigate at the top level of the component
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
@@ -39,6 +42,7 @@ const Account = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log("User created:", userCredential.user);
+      navigate("/nutrition"); // Use navigate here to redirect after signup
     } catch (error) {
       setError(error.message);
     }
@@ -50,6 +54,7 @@ const Account = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User signed in:", userCredential.user);
+      navigate("/nutrition"); // Use navigate here to redirect after signin
     } catch (error) {
       setError(error.message);
     }
@@ -60,6 +65,7 @@ const Account = () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       console.log("Google sign-in success:", result.user);
+      navigate("/nutrition"); // Use navigate here to redirect after Google sign-in
     } catch (error) {
       setError(error.message);
     }
