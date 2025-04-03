@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import { useCalories } from "./CaloriesContext";
 
 const CaloriesTracker = () => {
-  const { setGoalCalories } = useCalories();
+  const { goalCalories, setGoalCalories, goalId, setGoalId  } = useCalories();
 
   const activityLevels = [
     { label: "Basal Metabolic Rate (BMR)", value: 1.2 },
@@ -22,18 +22,18 @@ const CaloriesTracker = () => {
   ];
 
   const goals = [
-    { label: "Lean Muscle Build", value: 1 },
-    { label: "Weight Loss", value: 0.8 },
-    { label: "Extreme Weight Loss", value: 0.7 },
-    { label: "Lean Bulk", value: 1.15 },
+    { label: "Lean Muscle Build", value: 1, id: 0 },
+    { label: "Weight Loss", value: 0.8, id: 1 },
+    { label: "Extreme Weight Loss", value: 0.7, id: 2 },
+    { label: "Lean Bulk", value: 1.15, id: 3 },
   ];
 
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("male");
   const [age, setAge] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [activity, setActivity] = useState("");
-  const [goal, setGoal] = useState("");
+  const [goal, setGoal] = useState(null);
   const [calories, setCalories] = useState(null);
 
   const calculateCalories = (event) => {
@@ -54,7 +54,8 @@ const CaloriesTracker = () => {
 
   useEffect(() => {
     if (calories && goal) {
-      setGoalCalories(Math.round(calories * parseFloat(goal)));
+      setGoalCalories(Math.round(calories * parseFloat(goal.value)));
+      setGoalId(goal.id);
     }
   }, [calories, goal, setGoalCalories]);
 
@@ -147,24 +148,27 @@ const CaloriesTracker = () => {
               </label>
               <select
                 value={goal}
-                onChange={(e) => setGoal(e.target.value)}
+                onChange={(e) => setGoal(goals[e.target.value])}
                 className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-white"
               >
                 <option value="" hidden>
                   Select Your Goal
                 </option>
                 {goals.map((option) => (
-                  <option key={option.label} value={option.value}>
+                  <option key={option.label} value={option.id}>
                     {option.label}
                   </option>
                 ))}
               </select>
 
-              {goal && (
+              {(goal != null) && (
                 <h1 className="text-black text-center text-xl mt-4 border-2 rounded-2xl border-black mx-10">
                   Target:{" "}
+                  <script>
+                    console.log(goal);
+                  </script>
                   <span className="font-medium">
-                    {Math.round(calories * parseFloat(goal))}
+                    {Math.round(calories * parseFloat(goal.value))}
                   </span>{" "}
                   calories/day
                 </h1>

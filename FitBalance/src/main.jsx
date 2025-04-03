@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CaloriesProvider } from "./front-end/CaloriesContext"; // Import Context
+import { AccountProvider } from "./front-end/AccountContext";
 import "./index.css";
 import Home from "./front-end/Home";
 import Workout from "./front-end/Workout";
@@ -32,7 +33,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <CaloriesProvider>
-      <RouterProvider router={router} />
+    <AccountProvider>  {/* Wrap AccountProvider here */}
+        <RouterProvider router={router} />
+      </AccountProvider>
     </CaloriesProvider>
   </StrictMode>
 );
