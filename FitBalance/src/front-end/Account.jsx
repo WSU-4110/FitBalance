@@ -4,7 +4,9 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { auth, googleProvider } from "../firebaseConfig";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom"; // Correctly importing useNavigate
+import { useAccount } from "./AccountContext";
 
 const Account = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,6 +17,11 @@ const Account = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+
+  const { userEmail, setUserEmail, userName, setUserName, userLoggedIn, setUserLoggedIn } = useAccount();
+  
+
+  const navigate = useNavigate(); // Declare navigate at the top level of the component
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
@@ -39,6 +46,13 @@ const Account = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log("User created:", userCredential.user);
+      setUserEmail(userCredential.user.email);
+      setUserName(name);
+      await updateProfile(userCredential.user, {
+        displayName: name,  // Set the user's display name
+      });
+      setUserLoggedIn(true);
+
     } catch (error) {
       setError(error.message);
     }
@@ -50,6 +64,14 @@ const Account = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User signed in:", userCredential.user);
+      setUserEmail(userCredential.user.email);
+      setUserName(userCredential.user.displayName);
+      setName(userCredential.user.displayName);
+      await updateProfile(userCredential.user, {
+        displayName: name,  // Set the user's display name
+      });
+      setUserLoggedIn(true);
+
     } catch (error) {
       setError(error.message);
     }
@@ -60,10 +82,42 @@ const Account = () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       console.log("Google sign-in success:", result.user);
+      setUserEmail(userCredential.user.email);
+      setUserName(result.user.displayName);
+      setName(result.user.displayName);
+      setUserLoggedIn(true);
     } catch (error) {
       setError(error.message);
     }
   };
+  if (userLoggedIn)
+  {
+    return (
+      <>
+      <Navbar />
+      {/* Display this only if the user is logged in */}
+        <div className="w-full flex justify-center">
+          <h2 className="mb-6 text-2xl font-bold text-center">
+            {userName ? "Welcome " + userName + "!" : "Welcome User"} {/* Welcome message */}
+          </h2>
+        </div>
+        <div className="w-full flex justify-center">
+          <Button 
+            tag="Sign out" 
+            bgCol="#000000" 
+            textCol="#ffffff" 
+            mt={20} 
+            onClick={() => {
+              setUserLoggedIn(false); // Set userLoggedIn to false on sign-out
+              setUserName(""); // Clear user name
+              setUserEmail("");
+            }} 
+          />
+        </div>
+    </>
+
+    )
+  }
 
   return (
     <>
