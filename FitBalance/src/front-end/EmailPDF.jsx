@@ -24,15 +24,17 @@ const EmailButton = () => {
       alert('Invalid email');
       return;
     }
+    console.log("Sending email to", userEmail);
     try {
       const response = await fetch('http://localhost:5000/send-email', {
         method: 'POST',
         headers: {
+          'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          subject: 'Test Email',
-          message: 'This is a test email sent from the backend!',
+          subject: 'Workout',
+          message: 'Please check the attached workout routing!',
           to: userEmail,
         }),
       });
