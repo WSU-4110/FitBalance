@@ -1,0 +1,78 @@
+# FitBalance - Ignore unnecessary files
+
+# Logs
+FitBalance/logs/
+FitBalance/*.log
+FitBalance/npm-debug.log*
+FitBalance/yarn-debug.log*
+FitBalance/pnpm-debug.log*
+FitBalance/lerna-debug.log*
+
+# Dependencies
+FitBalance/node_modules/
+FitBalance/dist/
+FitBalance/dist-ssr/
+FitBalance/*.local
+FitBalance/.env
+FitBalance/.env.*
+node_modules
+
+# Build output
+FitBalance/build/
+FitBalance/out/
+FitBalance/coverage/
+FitBalance/.tmp/
+FitBalance/.cache/
+
+# Editor settings
+FitBalance/.vscode/
+!FitBalance/.vscode/extensions.json
+!FitBalance/.vscode/settings.json
+!FitBalance/.vscode/launch.json
+FitBalance/.idea/
+FitBalance/.DS_Store
+FitBalance/*.suo
+FitBalance/*.ntvs*
+FitBalance/*.njsproj
+FitBalance/*.sln
+FitBalance/*.sw?
+
+# System files
+FitBalance/Thumbs.db
+FitBalance/Desktop.ini
+
+# Debugging logs
+FitBalance/logs/*.log
+FitBalance/*.log.*
+FitBalance/*.trace
+
+# Package manager files
+FitBalance/npm-cache/
+FitBalance/yarn.lock
+FitBalance/package-lock.json
+/FitBalance/package-lock.json
+FitBalance/.pnpm-store/
+package-lock.json
+
+# Miscellaneous
+FitBalance/*.bak
+FitBalance/*.tmp
+FitBalance/*.old
+
+# Testing output
+FitBalance/jest-coverage/
+FitBalance/cypress/videos/
+FitBalance/cypress/screenshots/
+
+# Docker files
+FitBalance/.dockerignore
+FitBalance/Dockerfile*
+
+# Git
+FitBalance/.git/
+FitBalance/.gitignore.backup
+FitBalance/node_modules/.vite/deps/_metadata.json
+/FitBalance/node_modules
+
+FitBalance/node_modules/.vite/deps/_metadata.json
+/FitBalance/node_modules/.vite/deps

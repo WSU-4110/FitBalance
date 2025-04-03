@@ -3,10 +3,33 @@ import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/Navbar";
 import Button from "../components/Button";
+import EmailButton from "./EmailPDF";
+import { useAccount } from "./AccountContext";
+import { useCalories } from "./CaloriesContext";
 
 const Workout = () => {
   const navigate = useNavigate();
+  const { goalCalories, setGoalCalories, goalId, setGoalId  } = useCalories();
+  const { userEmail, setUserEmail, userName, setUserName, userLoggedIn, setUserLoggedIn } = useAccount();
 
+  let button;
+
+  if (!userLoggedIn) {
+    button = (
+      <Button
+        onClick={() => navigate("/account")}
+        tag="Sign Up!"
+        bgCol={"#8AC342"}
+        mt={10}
+      />
+    );
+  } else {
+    button = (
+      <EmailButton></EmailButton>
+    );
+  }
+
+  
   return (
     <div>
       <Navbar></Navbar>
@@ -31,13 +54,8 @@ const Workout = () => {
             just for you. Sign up now and get your custom plan delivered
             straight to your inbox!”
           </p>
-
-          <Button
-            onClick={() => navigate("/account")}
-            tag="Sign Up!"
-            bgCol={"#8AC342"}
-            mt={10}
-          />
+          
+          {button}
 
           <div className="mb-5"></div>
         </div>
