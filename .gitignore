@@ -1,69 +1,78 @@
+# FitBalance - Ignore unnecessary files
+
 # Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+FitBalance/logs/
+FitBalance/*.log
+FitBalance/npm-debug.log*
+FitBalance/yarn-debug.log*
+FitBalance/pnpm-debug.log*
+FitBalance/lerna-debug.log*
 
 # Dependencies
+FitBalance/node_modules/
+FitBalance/dist/
+FitBalance/dist-ssr/
+FitBalance/*.local
+FitBalance/.env
+FitBalance/.env.*
 node_modules
-dist
-dist-ssr
-*.local
-.env
-.env.*
 
 # Build output
-build
-out
-coverage
-.tmp
-.cache
+FitBalance/build/
+FitBalance/out/
+FitBalance/coverage/
+FitBalance/.tmp/
+FitBalance/.cache/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
-!.vscode/launch.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Editor settings
+FitBalance/.vscode/
+!FitBalance/.vscode/extensions.json
+!FitBalance/.vscode/settings.json
+!FitBalance/.vscode/launch.json
+FitBalance/.idea/
+FitBalance/.DS_Store
+FitBalance/*.suo
+FitBalance/*.ntvs*
+FitBalance/*.njsproj
+FitBalance/*.sln
+FitBalance/*.sw?
 
 # System files
-Thumbs.db
-Desktop.ini
+FitBalance/Thumbs.db
+FitBalance/Desktop.ini
 
-# Logs and debug
-logs/*.log
-*.log.*
-*.trace
+# Debugging logs
+FitBalance/logs/*.log
+FitBalance/*.log.*
+FitBalance/*.trace
 
-# Package managers
-npm-cache
-yarn.lock
+# Package manager files
+FitBalance/npm-cache/
+FitBalance/yarn.lock
+FitBalance/package-lock.json
+/FitBalance/package-lock.json
+FitBalance/.pnpm-store/
 package-lock.json
-.pnpm-store
 
-# Misc
-*.bak
-*.tmp
-*.old
+# Miscellaneous
+FitBalance/*.bak
+FitBalance/*.tmp
+FitBalance/*.old
 
-# Testing
-jest-coverage
-cypress/videos
-cypress/screenshots
+# Testing output
+FitBalance/jest-coverage/
+FitBalance/cypress/videos/
+FitBalance/cypress/screenshots/
 
-# Docker
-.dockerignore
-Dockerfile*
+# Docker files
+FitBalance/.dockerignore
+FitBalance/Dockerfile*
 
 # Git
-.git
-.gitignore.backup
+FitBalance/.git/
+FitBalance/.gitignore.backup
+FitBalance/node_modules/.vite/deps/_metadata.json
+/FitBalance/node_modules
+
+FitBalance/node_modules/.vite/deps/_metadata.json
+/FitBalance/node_modules/.vite/deps
