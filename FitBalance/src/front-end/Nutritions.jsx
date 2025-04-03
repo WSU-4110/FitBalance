@@ -326,6 +326,7 @@ const Nutritions = () => {
           >
             {showAddFoodForm ? "Hide Add New Food" : "Add New Food"}
           </button>
+          
 
           {showAddFoodForm && (
             <div className="bg-white p-6 rounded-2xl shadow-lg mt-4">
