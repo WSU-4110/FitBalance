@@ -33,8 +33,8 @@ app.post('/send-email', (req, res) => {
 
   const mailOptions = {
     from: process.env.SERVER_GMAIL_ADDR,
-    to,
-    subject,
+    to: to,
+    subject: subject,
     text: message,
     attachments: [
       {
