@@ -187,7 +187,9 @@ const Nutritions = () => {
               className="w-16 min-w-[4rem] p-1 border rounded text-center"
               placeholder="100"
               value={food.weight}
-              onChange={(e) => handleInputChange(category, index, e.target.value)}
+              onChange={(e) =>
+                handleInputChange(category, index, e.target.value)
+              }
             />
             <span className="ml-1">g</span>
           </div>
@@ -283,36 +285,44 @@ const Nutritions = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl mt-10">
           {/* Protein List */}
           <div className="bg-white p-6 rounded-2xl shadow-lg">
-            <h2 className="text-xl font-semibold text-green-600 text-center mb-4">
+            <h2 className="text-xl font-semibold text-[#8AC342] text-center mb-4">
               {proteinTotal.calories} Cal
             </h2>
-            <h3 className="text-lg font-bold text-gray-800 text-center mb-6">Protein</h3>
-            <ul className="space-y-4">{renderFoodList("protein")}</ul>
-            <div className="mt-6 text-center font-bold text-green-600">
+            <h3 className="text-lg font-bold text-gray-800 text-center mb-6">
+              Protein
+            </h3>
+            <ul className="space-y-4 flex flex-col justify-between  ">
+              {renderFoodList("protein")}
+            </ul>
+            <div className="mt-6 text-center font-bold text-[#8AC342]">
               Total Protein = {proteinTotal.protein.toFixed(1)}g
             </div>
           </div>
 
           {/* Carbs List */}
           <div className="bg-white p-6 rounded-2xl shadow-lg">
-            <h2 className="text-xl font-semibold text-green-600 text-center mb-4">
+            <h2 className="text-xl font-semibold text-[#8AC342] text-center mb-4">
               {carbsTotal.calories} Cal
             </h2>
-            <h3 className="text-lg font-bold text-gray-800 text-center mb-6">Carbs</h3>
+            <h3 className="text-lg font-bold text-gray-800 text-center mb-6">
+              Carbs
+            </h3>
             <ul className="space-y-4">{renderFoodList("carbs")}</ul>
-            <div className="mt-6 text-center font-bold text-green-600">
+            <div className="mt-6 text-center font-bold text-[#8AC342]">
               Total Carbs = {carbsTotal.carbs.toFixed(1)}g
             </div>
           </div>
 
           {/* Fats List */}
           <div className="bg-white p-6 rounded-2xl shadow-lg">
-            <h2 className="text-xl font-semibold text-green-600 text-center mb-4">
+            <h2 className="text-xl font-semibold text-[#8AC342] text-center mb-4">
               {fatsTotal.calories} Cal
             </h2>
-            <h3 className="text-lg font-bold text-gray-800 text-center mb-6">Fats</h3>
+            <h3 className="text-lg font-bold text-gray-800 text-center mb-6">
+              Fats
+            </h3>
             <ul className="space-y-4">{renderFoodList("fats")}</ul>
-            <div className="mt-6 text-center font-bold text-green-600">
+            <div className="mt-6 text-center font-bold text-[#8AC342]">
               Total Fats = {fatsTotal.fat.toFixed(1)}g
             </div>
           </div>
@@ -326,17 +336,20 @@ const Nutritions = () => {
           >
             {showAddFoodForm ? "Hide Add New Food" : "Add New Food"}
           </button>
+          
 
           {showAddFoodForm && (
             <div className="bg-white p-6 rounded-2xl shadow-lg mt-4">
-              <h2 className="text-xl font-semibold text-green-600 text-center mb-4">
+              <h2 className="text-xl font-semibold text-[#8AC342] text-center mb-4">
                 Add New Food
               </h2>
               <div className="flex flex-col space-y-4">
                 {/* Food Type Dropdown */}
                 <select
                   value={newFood.type}
-                  onChange={(e) => setNewFood({ ...newFood, type: e.target.value })}
+                  onChange={(e) =>
+                    setNewFood({ ...newFood, type: e.target.value })
+                  }
                   className="border p-2 rounded"
                 >
                   <option value="protein">Protein</option>
@@ -349,28 +362,36 @@ const Nutritions = () => {
                   placeholder="Food Name"
                   className="border p-2 rounded"
                   value={newFood.name}
-                  onChange={(e) => setNewFood({ ...newFood, name: e.target.value })}
+                  onChange={(e) =>
+                    setNewFood({ ...newFood, name: e.target.value })
+                  }
                 />
                 <input
                   type="number"
                   placeholder="Calories per 100g"
                   className="border p-2 rounded"
                   value={newFood.caloriesPer100g}
-                  onChange={(e) => setNewFood({ ...newFood, caloriesPer100g: e.target.value })}
+                  onChange={(e) =>
+                    setNewFood({ ...newFood, caloriesPer100g: e.target.value })
+                  }
                 />
                 <input
                   type="number"
                   placeholder="Macro per 100g"
                   className="border p-2 rounded"
                   value={newFood.macroPer100g}
-                  onChange={(e) => setNewFood({ ...newFood, macroPer100g: e.target.value })}
+                  onChange={(e) =>
+                    setNewFood({ ...newFood, macroPer100g: e.target.value })
+                  }
                 />
                 <input
                   type="number"
                   placeholder="Weight"
                   className="border p-2 rounded"
                   value={newFood.weight}
-                  onChange={(e) => setNewFood({ ...newFood, weight: e.target.value })}
+                  onChange={(e) =>
+                    setNewFood({ ...newFood, weight: e.target.value })
+                  }
                 />
                 <button
                   onClick={handleAddFood}

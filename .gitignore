@@ -15,7 +15,12 @@ FitBalance/dist-ssr/
 FitBalance/*.local
 FitBalance/.env
 FitBalance/.env.*
-node_modules
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
+.env.*
 
 # Build output
 FitBalance/build/
