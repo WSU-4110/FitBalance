@@ -31,33 +31,6 @@ APIs: External food and exercise databases
 Version Control: Git and GitHub
 
 
-
-Installation 
-1 Clone the Repository:
-bash
-Copy code
-git clone https://github.com/your-username/FitBalance.git
-
-2️ Navigate to the Project Directory:
-bash
-Copy code
-cd FitBalance
-
-3️ Install Dependencies:
-bash
-Copy code
-npm install
-
-4️ Start the Development Server:
-bash
-Copy code
-npm start
-
-5️ Access the Application:
- Visit http://localhost:3000 in your browser.
-
-
-
 Usage 
 Users:
 🔹 Register and log in to access personalized features.
