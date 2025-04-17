@@ -26,7 +26,7 @@ const EmailButton = () => {
     }
     console.log("Sending email to", userEmail);
     try {
-      const response = await fetch('http://localhost:5000/send-email', {
+      const response = await fetch(`${window.location.origin}:5000/send-email/${goalId}`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -46,7 +46,7 @@ const EmailButton = () => {
       }
     } catch (error) {
       console.error('Error sending email:', error);
-      alert('Error sending email');
+      alert('[Client] Error sending email');
     }
   };
 
