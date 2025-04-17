@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "../components/Navbar";
 import { useCalories } from "./CaloriesContext"; // Import Context
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { auth, db } from "../firebaseConfig"; // adjust path if needed
 
 // Abstract Base Class: FoodItem
 class FoodItem {
@@ -99,28 +101,79 @@ const Nutritions = () => {
       FoodFactory.createFood("fats", "Nut Butters", 550, 45),
     ],
   });
+
   useEffect(() => {
-    localStorage.setItem("foods", JSON.stringify(foods)); // Save food data to local storage
+    const saveFoodsToFirestore = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const userRef = doc(db, "users", user.uid);
+        const formattedFoods = JSON.parse(JSON.stringify(foods)); // serialize class instances
+        await setDoc(userRef, { foods: formattedFoods }, { merge: true });
+      }
+    };
+  
+    saveFoodsToFirestore();
   }, [foods]);
   
+  
   useEffect(() => {
-    const storedFoods = JSON.parse(localStorage.getItem("foods"));
-    if (storedFoods) {
-      // Recreate the stored food items using FoodFactory
-      const reconstructedFoods = {
-        protein: storedFoods.protein.map(food =>
-          FoodFactory.createFood("protein", food.name, food.caloriesPer100g, food.proteinPer100g, food.weight)
-        ),
-        carbs: storedFoods.carbs.map(food =>
-          FoodFactory.createFood("carbs", food.name, food.caloriesPer100g, food.carbsPer100g, food.weight)
-        ),
-        fats: storedFoods.fats.map(food =>
-          FoodFactory.createFood("fats", food.name, food.caloriesPer100g, food.fatPer100g, food.weight)
-        ),
-      };
-      setFoods(reconstructedFoods);
+  const fetchFoodsFromFirestore = async () => {
+    const user = auth.currentUser;
+    if (user) {
+      const userRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(userRef);
+
+      if (docSnap.exists()) {
+        const storedFoods = docSnap.data().foods;
+        if (storedFoods) {
+          const reconstructedFoods = {
+            protein: storedFoods.protein?.map((food) =>
+              FoodFactory.createFood("protein", food.name, food.caloriesPer100g, food.proteinPer100g, food.weight)
+            ) || [],
+            carbs: storedFoods.carbs?.map((food) =>
+              FoodFactory.createFood("carbs", food.name, food.caloriesPer100g, food.carbsPer100g, food.weight)
+            ) || [],
+            fats: storedFoods.fats?.map((food) =>
+              FoodFactory.createFood("fats", food.name, food.caloriesPer100g, food.fatPer100g, food.weight)
+            ) || [],
+          };
+          setFoods(reconstructedFoods);
+        }
+      }
     }
-  }, []);
+  };
+
+  fetchFoodsFromFirestore();
+}, []);
+useEffect(() => {
+  const saveGoalCalories = async () => {
+    const user = auth.currentUser;
+    if (user) {
+      const userRef = doc(db, "users", user.uid);
+      await setDoc(userRef, { goalCalories }, { merge: true });
+    }
+  };
+
+  saveGoalCalories();
+}, [goalCalories]);
+useEffect(() => {
+  const fetchGoalCalories = async () => {
+    const user = auth.currentUser;
+    if (user) {
+      const userRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(userRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data.goalCalories) {
+          setGoalCalories(data.goalCalories);
+        }
+      }
+    }
+  };
+
+  fetchGoalCalories();
+}, []);
+
   
   // State for adding new food
   const [newFood, setNewFood] = useState({
