@@ -11,7 +11,7 @@ const FoodList = ({
   onCancelEdit,
   onDelete,
   onQuickAdd,
-  onNewFoodChange, // Added onNewFoodChange to props
+  onNewFoodChange,
 }) => {
   if (foods.length === 0 && userLoggedIn) {
     return (
@@ -37,7 +37,7 @@ const FoodList = ({
         const nutrition = food.getNutrition()
         const isEditing = editingFood.category === category && editingFood.index === index
 
-        // Determine which macro to display based on category
+        
         let macroDisplay = ""
         if (category === "protein" && nutrition.protein) {
           macroDisplay = `${nutrition.protein}g Protein`
