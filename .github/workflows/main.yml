@@ -29,6 +29,7 @@ jobs:
         working-directory: ./FitBalance
 
       - name: Run tests with Knapsack Pro
+        working-directory: ./FitBalance
         env:
           KNAPSACK_PRO_TEST_SUITE_TOKEN_JEST: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_JEST }}
           KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
