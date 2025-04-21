@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18.x]
+        node-version: [22.x]
         ci_node_total: [2]
         ci_node_index: [0, 1]
 
